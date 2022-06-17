@@ -1,1 +1,1 @@
-web: hypercorn main:app --reload
+web: hypercorn main:app

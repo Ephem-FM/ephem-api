@@ -22,5 +22,3 @@ def create_city(city: City):
     db.append(city.dict())
     return db[-1]
 
-if __name__=="__main__":
-    print("hola")

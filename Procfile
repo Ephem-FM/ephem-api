@@ -1,2 +1,2 @@
-worker: hypercorn main:app --bind 0.0.0.0:8080
-web: hypercorn main:app --bind 0.0.0.0:8080
+worker: hypercorn main:app --bind :$PORT
+web: hypercorn main:app --bind :$PORT

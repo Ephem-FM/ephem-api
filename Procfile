@@ -1,1 +1,1 @@
-web: hypercorn main:app
+worker: hypercorn main:app

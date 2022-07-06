@@ -8,7 +8,7 @@ db = []
 class Preferences(BaseModel):
     valence: float
     energy: float
-    instrumentalness: bool
+    popularity: int
 
 # @app.get('/')
 # def index():

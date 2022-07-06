@@ -4,10 +4,8 @@ from sqlalchemy import create_engine
 
 def main():
     df = retrieve_df('playlists')
-    gf = df.groupby('show').mean()
-
-    pd.set_option("display.max_rows", None)
-    print(gf)
+    top_three_shows(df)
+   
 
 def retrieve_df(table_name):
     # enter in characteristics of different databases
@@ -38,6 +36,18 @@ def retrieve_df(table_name):
 
     # read a table from database into pandas dataframe, replace "tablename" with your table name
     return pd.read_sql_table(table_name, engine)
+
+def top_three_shows(df):
+    gf = df.groupby('show').mean()
+    pd.set_option("display.max_rows", None)
+    # print(gf)
+    for row in gf.itertuples():
+        print("show: ", row[0])
+        print("artist popularity: ", row[1])
+        print("danceability: ", row[2])
+        print("valence: ", row[3])
+        print("energy: ", row[4])
+        print()
 
 if __name__=="__main__":
     main()

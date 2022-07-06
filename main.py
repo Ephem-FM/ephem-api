@@ -5,20 +5,21 @@ app = FastAPI()
 
 db = []
 
-class City(BaseModel):
-    name: str
-    timezone: dict
+class Preferences(BaseModel):
+    valence: float
+    energy: float
+    instrumentalness: bool
 
-@app.get('/')
-def index():
-    return  {'key': 'value'}
+# @app.get('/')
+# def index():
+#     return  {'key': 'value'}
 
-@app.get('/cities')
-def get_cities():
-    return db
+# @app.get('/cities')
+# def get_cities():
+#     return db
 
-@app.post('/cities')
-def create_city(city: City):
-    db.append(city.dict())
+@app.post('/preferences')
+def create_city(preferences: Preferences):
+    db.append(preferences.dict())
     return db[-1]
 

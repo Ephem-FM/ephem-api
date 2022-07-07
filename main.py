@@ -8,18 +8,20 @@ db = []
 class Preferences(BaseModel):
     valence: float
     energy: float
-    popularity: int
+    danceability: float
+    popularity: float
 
 # @app.get('/')
 # def index():
 #     return  {'key': 'value'}
 
-# @app.get('/cities')
+# @app.get('/preferences')
 # def get_cities():
 #     return db
 
 @app.post('/preferences')
-def create_city(preferences: Preferences):
+def create_recs(preferences: Preferences):
     db.append(preferences.dict())
-    return db[-1]
+    return "hi friend"
+    # db[-1]
 

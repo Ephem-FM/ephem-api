@@ -6,9 +6,9 @@ def main(preferences = None):
     df = retrieve_df('playlists')
     preferences = {
         'artist popularity': 84,
-        'danceability': .70,
-        'valence': .84,
-        'energy': .92
+        'danceability': .94,
+        'valence': .24,
+        'energy': .24
     }
     return top_three_shows(df, preferences)
 
@@ -53,14 +53,16 @@ def top_three_shows(df, preferences):
     # a dict of show names and composite score
     shows_composite = {}
     for row in gf.itertuples():
-        composite_score = get_score(preferences['artist popularity']/100, row[1]/100) + get_score(preferences['danceability'], row[2]) + get_score(preferences['valence'], row[3]) + get_score(preferences['energy'], row[4])
+        composite_score = get_score(preferences['danceability'], row[2]) + get_score(preferences['valence'], row[3]) + get_score(preferences['valence'], row[3]) + get_score(preferences['energy'], row[4])
+        # composite_score = get_score(preferences['artist popularity']/100, row[1]/100) + get_score(preferences['danceability'], row[2]) + get_score(preferences['valence'], row[3]) + get_score(preferences['energy'], row[4])
         shows_composite[row[0]] = composite_score
     
     # ds = pd.DataFrame(shows_composite, index=[0])
     # print(ds)
     series = pd.Series(shows_composite)
-    top_3 = series.sort_values(ascending=False)[0:3]
-    return top_3
+    sorted_series = series.sort_values(ascending=False)[0:3]
+    print(sorted_series)
+    return sorted_series
 
 if __name__=="__main__":
     print(main())

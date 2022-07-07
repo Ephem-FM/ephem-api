@@ -1,3 +1,4 @@
+import string
 from fastapi import FastAPI
 from pydantic import BaseModel
 import process
@@ -7,10 +8,12 @@ app = FastAPI()
 db = []
 
 class Preferences(BaseModel):
+    phone: str
+    timezone: str
     valence: float
     energy: float
     danceability: float
-    popularity: float
+    popularity: int
 
 # @app.get('/')
 # def index():

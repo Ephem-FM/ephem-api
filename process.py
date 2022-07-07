@@ -2,7 +2,7 @@ import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
 
-def main():
+def main(preferences = None):
     df = retrieve_df('playlists')
     preferences = {
         'artist popularity': 64,
@@ -10,7 +10,7 @@ def main():
         'valence': .70,
         'energy': .5
     }
-    top_three_shows(df, preferences)
+    return top_three_shows(df, preferences)
 
 def retrieve_df(table_name):
     # enter in characteristics of different databases
@@ -57,14 +57,7 @@ def top_three_shows(df, preferences):
         shows_composite[row[0]] = composite_score
     
     top_3 = pd.Series(shows_composite).nlargest(n=3, keep='first')
-    print(top_3)
+    return top_3
 
 if __name__=="__main__":
     main()
-
-# print("show: ", row[0])
-# print("artist popularity: ", row[1])
-# print("danceability: ", row[2])
-# print("valence: ", row[3])
-# print("energy: ", row[4])
-# print()

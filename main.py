@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import process
 
 app = FastAPI()
 
@@ -22,6 +23,6 @@ class Preferences(BaseModel):
 @app.post('/preferences')
 def create_recs(preferences: Preferences):
     db.append(preferences.dict())
-    return "hi friend"
-    # db[-1]
+    top_3 = process.main(preferences.dict())
+    return top_3
 

@@ -107,6 +107,8 @@ def now_or_later(show_day, start_time, timezone):
     print("then", then)
     start_hour, start_minute = int(math.modf(start_time)[1]), 30 if int(math.modf(start_time)[0]) == 5 else 0
     then = find_next_day(then, show_day, start_hour, start_minute)
+    print('returned then')
+    print(then)
     then = then.shift('utc').epoch
 
     difference = then - nau

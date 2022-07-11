@@ -20,8 +20,7 @@ def schedule(user_number, show):
     print("start time", start_time)
     print("timezone", timezone)
     now, when = now_or_later(show_day, start_time, timezone)
-    print("NOW", "WHEN")
-    print(now, when)
+    print(now, when, show)
     return
 
     # send now
@@ -60,47 +59,27 @@ def now_or_later(show_day, start_time, timezone):
     nau = nau.epoch
 
     def find_next_day(d, show_day, start_hour, start_minute):
-        print("INSIDE FIND NEXT DAY")
-        print(d)
-        print(show_day)
-        print(start_hour)
-        print(start_minute)
-
         match show_day:
             case 0:
                 d = d.next_monday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 1:
                 d = d.next_tuesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 2:
                 d = d.next_wednesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 3:
                 d = d.next_thursday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 4:
                 d = d.next_friday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 5:
                 d = d.next_saturday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
             case 6:
                 d = d.next_sunday().replace(hour=start_hour, minute=start_minute).truncate('minute')
-                print("inside find next day")
-                print(type(d))
                 return d
 
             # If an exact match is not confirmed, this last case will be used if provided
@@ -109,12 +88,10 @@ def now_or_later(show_day, start_time, timezone):
 
     # when the show will occur
     then = Delorean().shift(timezone)
-    print("nau", nau)
-    print("then", then)
+    # print("nau", nau)
+    # print("then", then)
     start_hour, start_minute = int(math.modf(start_time)[1]), 30 if int(math.modf(start_time)[0]) == 5 else 0
     then = find_next_day(then, show_day, start_hour, start_minute)
-    print('returned then')
-    print(then)
     then = then.shift('utc').epoch
 
     difference = then - nau

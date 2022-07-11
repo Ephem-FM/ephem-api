@@ -6,9 +6,8 @@ import texts
 def main(preferences = None):
     df = retrieve_df('playlists')
     top_three = top_three_shows(df, preferences)
-    print(top_three)
-    return top_three
-    # shows = retrieve_show_info(top_three.keys())
+    shows = retrieve_show_info(top_three.keys())
+    return shows
     # for s in shows:
     #     texts.schedule(s)
 

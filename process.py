@@ -1,16 +1,13 @@
 import pandas as pd
 import psycopg2
 from sqlalchemy import create_engine
-import texts
 
 def main(preferences = None):
     df = retrieve_df('playlists')
     top_three = top_three_shows(df, preferences)
     shows = retrieve_show_info(top_three.keys())
     return shows
-    # for s in shows:
-    #     texts.schedule(s)
-
+    
 def retrieve_df(table_name):
     # enter in characteristics of different databases
     DATABASES = {

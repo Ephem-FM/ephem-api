@@ -1,3 +1,4 @@
+import sched
 from time import time
 import math
 from tracemalloc import start
@@ -5,6 +6,11 @@ from twilio.rest import Client
 from datetime import datetime, timedelta
 from delorean import Delorean, epoch
 import calendar
+
+def main(number, show):
+    print("number", number)
+    print("show", show)
+    # schedule(number, show)
 
 def now_or_later(show_day, start_time, timezone):
     # the all-important now
@@ -64,6 +70,7 @@ def schedule(user_number, show):
 
     show_name, start_time, timezone = show[3], show[4], show[x]
     now, when = now_or_later(show_name, start_time, timezone)
+
     # send now
     if(now):
         body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! \
@@ -94,25 +101,6 @@ def schedule(user_number, show):
             )
         print(message.sid)
 
-
-def main():
-    print(datetime.now() + timedelta(hours=2))
-
 if __name__=="__main__":
     now_or_later(0, 11.0, 'US/Mountain')
     
-
-# def get_day_difference(show_weekday = 3):
-#     today_weekday = datetime.utcnow().weekday()
-#     print(today_weekday)
-#     if(today_weekday == show_weekday):
-#         return 0
-#     # if later in the week
-#     elif(show_weekday > today_weekday):
-#         return show_weekday - today_weekday
-#     # if earlier in next week
-#     elif(show_weekday < today_weekday):
-#         return (show_weekday + 1 + (6-today_weekday))
-
-    
-#     day = list(calendar.day_name)[show_day]

@@ -2,6 +2,7 @@ import string
 from fastapi import FastAPI
 from pydantic import BaseModel
 import process
+import texts
 
 app = FastAPI()
 
@@ -14,9 +15,10 @@ class Preferences(BaseModel):
 
 @app.post('/preferences')
 def create_recs(preferences: Preferences):
-    print("PREFERENCES: ", preferences)
-    shows = process.main(preferences.dict())
-    print("shows", shows)
+    preferences = preferences.dict()
+    shows = process.main(preferences)
+    for s in shows:
+        texts.schedule(s, preferences.number)
     return shows
 
 if __name__=="__main__":

@@ -52,7 +52,7 @@ def top_three_shows(df, preferences):
     # a dict of show names and composite score
     shows_composite = {}
     for row in gf.itertuples():
-        composite_score = get_score(preferences['artist popularity']/100, row[1]/100) + get_score(preferences['danceability'], row[2]) + get_score(preferences['valence'], row[3]) + get_score(preferences['energy'], row[5])
+        composite_score = get_score(preferences['popularity']/100, row[1]/100) + get_score(preferences['danceability'], row[2]) + get_score(preferences['valence'], row[3]) + get_score(preferences['energy'], row[5])
         shows_composite[row[0]] = composite_score
 
     # retrieve top 3 shows based on composite score

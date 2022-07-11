@@ -15,7 +15,10 @@ class Preferences(BaseModel):
 @app.post('/preferences')
 def create_recs(preferences: Preferences):
     print("PREFERENCES: ", preferences)
-    return process.main(preferences.dict())
+    print("hi")
+    top_three = process.main(preferences.dict())
+    print("top three")
+    return top_three
 
 if __name__=="__main__":
     preferences = {

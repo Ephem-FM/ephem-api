@@ -26,31 +26,28 @@ def schedule(user_number, show):
         print(body)
         number = '+1' + user_number
         print(number)
-        
-        # message = client.messages \
-        #     .create(
-        #     messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-        #     body=body,
-        #     to=('+1' + user_number)
-        # )
-        # print(message.sid)
+
+        message = client.messages \
+            .create(
+            messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+            body=body,
+            to=('+1' + user_number)
+        )
+        print(message.sid)
 
     # send later
     elif(not now):
         body = f"The stars have aligned and a show matching your preferences is about to start. Tune into {show_station} out of {show_location} at {show_station_url} to listen to {show_name}. Do enjoy."
-        print(body)
         number = '+1' + user_number
-        print(number)
-
-        # message = client.messages \
-        #     .create(
-        #         messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-        #         body=body,
-        #         send_at=when,
-        #         schedule_type='fixed',
-        #         to=('+1' + user_number)
-        #     )
-        # print(message.sid)
+        message = client.messages \
+            .create(
+                messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+                body=body,
+                send_at=when,
+                schedule_type='fixed',
+                to=('+1' + user_number)
+            )
+        print(message.sid)
 
 def now_or_later(show_day, start_time, timezone):
     # the all-important now

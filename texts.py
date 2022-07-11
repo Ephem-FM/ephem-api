@@ -10,7 +10,45 @@ import calendar
 def main(number, show):
     print("number", number)
     print("show", show)
-    # schedule(number, show)
+    schedule(number, show)
+
+def schedule(user_number, show):
+    account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
+    auth_token  = "cfbab195621b28a0753619e06ce95fe4"
+    client = Client(account_sid, auth_token)
+
+    show_name, start_time, timezone = show[3], show[4], show[16]
+    now, when = now_or_later(show_name, start_time, timezone)
+
+    # send now
+    if(now):
+        body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! \
+            It's called {show.name} on the station {show.station} out of {show.location}. \
+            Please go to {show.station_url} and tune in at the next hour mark."
+
+        message = client.messages \
+            .create(
+            messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+            body=body,
+            to=('+1' + user_number)
+        )
+        print(message.sid)
+
+    # send later
+    elif(not now):
+        body = f"The stars have aligned and a show matching your preferences is about to start. \
+            Tune into {show.station} out of {show.location} at {show.station_url} to listen to {show.name}. \
+            Do enjoy."
+
+        message = client.messages \
+            .create(
+                messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+                body=body,
+                send_at=when,
+                schedule_type='fixed',
+                to=('+1' + user_number)
+            )
+        print(message.sid)
 
 def now_or_later(show_day, start_time, timezone):
     # the all-important now
@@ -63,43 +101,7 @@ def now_or_later(show_day, start_time, timezone):
     else:
         print('scheduling failed')
 
-def schedule(user_number, show):
-    account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
-    auth_token  = "cfbab195621b28a0753619e06ce95fe4"
-    client = Client(account_sid, auth_token)
 
-    show_name, start_time, timezone = show[3], show[4], show[x]
-    now, when = now_or_later(show_name, start_time, timezone)
-
-    # send now
-    if(now):
-        body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! \
-            It's called {show.name} on the station {show.station} out of {show.location}. \
-            Please go to {show.station_url} and tune in at the next hour mark."
-
-        message = client.messages \
-            .create(
-            messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-            body=body,
-            to=('+1' + user_number)
-        )
-        print(message.sid)
-
-    # send later
-    elif(not now):
-        body = f"The stars have aligned and a show matching your preferences is about to start. \
-            Tune into {show.station} out of {show.location} at {show.station_url} to listen to {show.name}. \
-            Do enjoy."
-
-        message = client.messages \
-            .create(
-                messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-                body=body,
-                send_at=when,
-                schedule_type='fixed',
-                to=('+1' + user_number)
-            )
-        print(message.sid)
 
 if __name__=="__main__":
     now_or_later(0, 11.0, 'US/Mountain')

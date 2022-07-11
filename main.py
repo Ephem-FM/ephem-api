@@ -1,5 +1,6 @@
 import string
 from fastapi import FastAPI
+from numpy import number
 from pydantic import BaseModel
 import process
 import texts
@@ -7,7 +8,7 @@ import texts
 app = FastAPI()
 
 class Preferences(BaseModel):
-    phone: str
+    phone_number: str
     valence: float
     energy: float
     danceability: float
@@ -18,7 +19,7 @@ def create_recs(preferences: Preferences):
     preferences = preferences.dict()
     shows = process.main(preferences)
     for s in shows:
-        texts.schedule(s, preferences.number)
+        texts.schedule(preferences.phone_number, s)
     return shows
 
 if __name__=="__main__":

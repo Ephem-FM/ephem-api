@@ -19,10 +19,10 @@ def schedule(user_number, show):
     now, when = now_or_later(show_day, start_time, timezone)
     when = epoch(when).shift("UTC")
     print("when scheduled: ", when)
-    print("name", show['name'])
-    print("station", show['station'])
-    print("location", show['location'])
-    print("url", show['station_url'])
+    print("name", show[1])
+    print("station", show[2])
+    print("location", show[-2])
+    print("url", show[-1])
     return
 
     # send now

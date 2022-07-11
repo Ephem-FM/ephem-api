@@ -16,11 +16,13 @@ def schedule(user_number, show):
     client = Client(account_sid, auth_token)
 
     show_day, start_time, timezone = show[3], show[4], show[14]
-    print("show name", show_day)
-    print("start time", start_time)
-    print("timezone", timezone)
     now, when = now_or_later(show_day, start_time, timezone)
-    print(now, when, show)
+    when = epoch(when).shift("UTC")
+    print("when scheduled: ", when)
+    print("name", show['name'])
+    print("station", show['station'])
+    print("location", show['location'])
+    print("url", show['station_url'])
     return
 
     # send now

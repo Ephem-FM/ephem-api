@@ -8,7 +8,6 @@ from delorean import Delorean, epoch
 import calendar
 
 def main(phone, show):
-    send_introductory_text(phone)
     schedule_show_texts(phone, show)
 
 def send_introductory_text(phone):

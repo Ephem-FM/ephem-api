@@ -60,6 +60,11 @@ def now_or_later(show_day, start_time, timezone):
     nau = nau.epoch
 
     def find_next_day(d, show_day, start_hour, start_minute):
+        print("INSIDE FIND NEXT DAY")
+        print(d)
+        print(show_day)
+        print(start_hour)
+        print(start_minute)
         match show_day:
             case 0:
                 d = d.next_monday().replace(hour=start_hour, minute=start_minute).truncate('minute')

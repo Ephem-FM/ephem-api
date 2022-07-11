@@ -62,19 +62,40 @@ def now_or_later(show_day, start_time, timezone):
     def find_next_day(d, show_day, start_hour, start_minute):
         match show_day:
             case 0:
-                return d.next_monday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_monday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 1:
-                return d.next_tuesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_tuesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 2:
-                return d.next_wednesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_wednesday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 3:
-                return d.next_thursday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_thursday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 4:
-                return d.next_friday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_friday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 5:
-                return d.next_saturday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_saturday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
             case 6:
-                return d.next_sunday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                d = d.next_sunday().replace(hour=start_hour, minute=start_minute).truncate('minute')
+                print("inside find next day")
+                print(type(d))
+                return d
 
             # If an exact match is not confirmed, this last case will be used if provided
             case _:

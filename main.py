@@ -18,6 +18,7 @@ class Preferences(BaseModel):
 def create_recs(preferences: Preferences):
     preferences = preferences.dict()
     shows = process.main(preferences)
+    texts.send_introductory_text(preferences['phone'])
     for s in shows:
         texts.main(preferences['phone'], s)
     return shows

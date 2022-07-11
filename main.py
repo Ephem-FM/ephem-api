@@ -9,7 +9,6 @@ db = []
 
 class Preferences(BaseModel):
     phone: str
-    timezone: str
     valence: float
     energy: float
     danceability: float
@@ -29,6 +28,7 @@ def create_recs(preferences: Preferences):
 
 if __name__=="__main__":
     preferences = {
+        'phone': '5127759300',
         'artist popularity': 64,
         'danceability': .24,
         'valence': .70,

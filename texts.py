@@ -15,11 +15,11 @@ def schedule(user_number, show):
     auth_token  = "cfbab195621b28a0753619e06ce95fe4"
     client = Client(account_sid, auth_token)
 
-    show_name, start_time, timezone = show[1], show[4], show[14]
-    print("show name", show_name)
+    show_day, start_time, timezone = show[3], show[4], show[14]
+    print("show name", show_day)
     print("start time", start_time)
     print("timezone", timezone)
-    now, when = now_or_later(show_name, start_time, timezone)
+    now, when = now_or_later(show_day, start_time, timezone)
     print("NOW", "WHEN")
     print(now, when)
     return
@@ -65,6 +65,7 @@ def now_or_later(show_day, start_time, timezone):
         print(show_day)
         print(start_hour)
         print(start_minute)
+
         match show_day:
             case 0:
                 d = d.next_monday().replace(hour=start_hour, minute=start_minute).truncate('minute')

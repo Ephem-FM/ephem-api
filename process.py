@@ -5,18 +5,12 @@ import texts
 
 def main(preferences = None):
     df = retrieve_df('playlists')
-    # preferences = {
-    #     'phone': '5127759300',
-    #     'artist popularity': 25,
-    #     'danceability': .61,
-    #     'valence': .70,
-    #     'energy': .61
-    # }
     top_three = top_three_shows(df, preferences)
+    print(top_three)
     return top_three
-    shows = retrieve_show_info(top_three.keys())
-    for s in shows:
-        texts.schedule(s)
+    # shows = retrieve_show_info(top_three.keys())
+    # for s in shows:
+    #     texts.schedule(s)
 
 def retrieve_df(table_name):
     # enter in characteristics of different databases
@@ -49,7 +43,6 @@ def retrieve_df(table_name):
     return pd.read_sql_table(table_name, engine)
 
 def top_three_shows(df, preferences):
-    return preferences
     gf = df.groupby('show_id').mean()
     pd.set_option("display.max_rows", None)
     # gets difference between a user's preferences and a show's mean

@@ -24,6 +24,7 @@ class Preferences(BaseModel):
 
 @app.post('/preferences')
 def create_recs(preferences: Preferences):
+    print("PREFERENCES: ", preferences)
     return process.main(preferences.dict())
 
 if __name__=="__main__":

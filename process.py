@@ -48,6 +48,7 @@ def retrieve_df(table_name):
     return pd.read_sql_table(table_name, engine)
 
 def top_three_shows(df, preferences):
+    return preferences
     gf = df.groupby('show_id').mean()
     pd.set_option("display.max_rows", None)
     # gets difference between a user's preferences and a show's mean

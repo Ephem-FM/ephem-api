@@ -22,11 +22,11 @@ def schedule(user_number, show):
  
     # send now
     if(now):
-        body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! \
-            It's called {show_name} on the station {show_station} out of {show_location}. \
-            Please go to {show_station_url} and tune in at the next hour mark."
-
+        body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! It's called {show_name} on the station {show_station} out of {show_location}. Please go to {show_station_url} and tune in at the next hour mark."
         print(body)
+        number = '+1' + user_number
+        print(number)
+        
         # message = client.messages \
         #     .create(
         #     messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
@@ -37,11 +37,11 @@ def schedule(user_number, show):
 
     # send later
     elif(not now):
-        body = f"The stars have aligned and a show matching your preferences is about to start. \
-            Tune into {show_station} out of {show_location} at {show_station_url} to listen to {show_name}. \
-            Do enjoy."
-
+        body = f"The stars have aligned and a show matching your preferences is about to start. Tune into {show_station} out of {show_location} at {show_station_url} to listen to {show_name}. Do enjoy."
         print(body)
+        number = '+1' + user_number
+        print(number)
+
         # message = client.messages \
         #     .create(
         #         messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',

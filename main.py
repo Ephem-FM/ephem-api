@@ -19,7 +19,7 @@ def create_recs(preferences: Preferences):
     preferences = preferences.dict()
     shows = process.main(preferences)
     for s in shows:
-        texts.schedule(preferences.phone, s)
+        texts.schedule(preferences['phone'], s)
     return shows
 
 if __name__=="__main__":

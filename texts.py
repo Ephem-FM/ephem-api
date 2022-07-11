@@ -8,17 +8,21 @@ from delorean import Delorean, epoch
 import calendar
 
 def main(phone, show):
-    print("phone", phone)
-    print("show", show)
-    # schedule(phone, show)
+    schedule(phone, show)
 
 def schedule(user_number, show):
     account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
     auth_token  = "cfbab195621b28a0753619e06ce95fe4"
     client = Client(account_sid, auth_token)
 
-    show_name, start_time, timezone = show[3], show[4], show[16]
+    show_name, start_time, timezone = show[1], show[4], show[14]
+    print("show name", show_name)
+    print("start time", start_time)
+    print("timezone", timezone)
     now, when = now_or_later(show_name, start_time, timezone)
+    print("NOW", "WHEN")
+    print(now, when)
+    return
 
     # send now
     if(now):
@@ -88,21 +92,20 @@ def now_or_later(show_day, start_time, timezone):
     print("difference", difference/(3600*24))
     # if more than 15 mins in future and less than one week
     if(900 < difference < 604800):
-        print('schedule regular')
+        return (False, then)
     # if greater than one week, shift back then send
     elif(604800 < difference < (604800 * 2)):
         then = epoch(then).shift('utc') - timedelta(weeks=1)
-        print(then)
-        print(epoch(nau).shift('utc'))
-        print('shift back a week then schedule')
+        return (False, then.epoch)
     # if less than 15 minutes in future, send text now!
     elif(difference < 900):
-        print('send now!')
+        return (True, then)
     else:
         print('scheduling failed')
 
-
-
 if __name__=="__main__":
-    now_or_later(0, 11.0, 'US/Mountain')
+    d = Delorean()
+    d = d.epoch
+    d = (epoch(d).shift('utc') - timedelta(weeks=1)).epoch
+    print(d)
     

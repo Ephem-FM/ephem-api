@@ -5,22 +5,12 @@ import process
 
 app = FastAPI()
 
-db = []
-
 class Preferences(BaseModel):
     phone: str
     valence: float
     energy: float
     danceability: float
     popularity: int
-
-# @app.get('/')
-# def index():
-#     return  {'key': 'value'}
-
-# @app.get('/preferences')
-# def get_cities():
-#     return db
 
 @app.post('/preferences')
 def create_recs(preferences: Preferences):
@@ -37,3 +27,11 @@ if __name__=="__main__":
     }
     print(process.main(preferences))
 
+
+# @app.get('/')
+# def index():
+#     return  {'key': 'value'}
+
+# @app.get('/preferences')
+# def get_cities():
+#     return db

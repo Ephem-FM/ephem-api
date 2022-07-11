@@ -13,6 +13,7 @@ def main(preferences = None):
     #     'energy': .61
     # }
     top_three = top_three_shows(df, preferences)
+    return top_three
     shows = retrieve_show_info(top_three.keys())
     for s in shows:
         texts.schedule(s)

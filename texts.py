@@ -18,42 +18,39 @@ def schedule(user_number, show):
     show_day, start_time, timezone = show[3], show[4], show[14]
     now, when = now_or_later(show_day, start_time, timezone)
     when = epoch(when).shift("UTC")
-    print("when scheduled: ", when)
-    print("name", show[1])
-    print("station", show[2])
-    print("location", show[-2])
-    print("url", show[-1])
-    return
-
+    show_name, show_station, show_location, show_station_url = show[1], show[2], show[-2], show[-1]
+ 
     # send now
     if(now):
         body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! \
-            It's called {show.name} on the station {show.station} out of {show.location}. \
-            Please go to {show.station_url} and tune in at the next hour mark."
+            It's called {show_name} on the station {show_station} out of {show_location}. \
+            Please go to {show_station_url} and tune in at the next hour mark."
 
-        message = client.messages \
-            .create(
-            messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-            body=body,
-            to=('+1' + user_number)
-        )
-        print(message.sid)
+        print(body)
+        # message = client.messages \
+        #     .create(
+        #     messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+        #     body=body,
+        #     to=('+1' + user_number)
+        # )
+        # print(message.sid)
 
     # send later
     elif(not now):
         body = f"The stars have aligned and a show matching your preferences is about to start. \
-            Tune into {show.station} out of {show.location} at {show.station_url} to listen to {show.name}. \
+            Tune into {show_station} out of {show_location} at {show_station_url} to listen to {show_name}. \
             Do enjoy."
 
-        message = client.messages \
-            .create(
-                messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
-                body=body,
-                send_at=when,
-                schedule_type='fixed',
-                to=('+1' + user_number)
-            )
-        print(message.sid)
+        print(body)
+        # message = client.messages \
+        #     .create(
+        #         messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+        #         body=body,
+        #         send_at=when,
+        #         schedule_type='fixed',
+        #         to=('+1' + user_number)
+        #     )
+        # print(message.sid)
 
 def now_or_later(show_day, start_time, timezone):
     # the all-important now

@@ -8,7 +8,7 @@ import texts
 app = FastAPI()
 
 class Preferences(BaseModel):
-    phone_number: str
+    phone: str
     valence: float
     energy: float
     danceability: float

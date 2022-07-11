@@ -7,10 +7,10 @@ from datetime import datetime, timedelta
 from delorean import Delorean, epoch
 import calendar
 
-def main(number, show):
-    print("number", number)
+def main(phone, show):
+    print("phone", phone)
     print("show", show)
-    schedule(number, show)
+    # schedule(phone, show)
 
 def schedule(user_number, show):
     account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"

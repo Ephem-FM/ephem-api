@@ -8,9 +8,24 @@ from delorean import Delorean, epoch
 import calendar
 
 def main(phone, show):
-    schedule(phone, show)
+    send_introductory_text(phone)
+    schedule_show_texts(phone, show)
 
-def schedule(user_number, show):
+def send_introductory_text(phone):
+    account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
+    auth_token  = "cfbab195621b28a0753619e06ce95fe4"
+    client = Client(account_sid, auth_token)
+    body = f"Hi friend :)  Welcome to ephem.  Your three shows have been scheduled and when the vibe's right, you'll know.  Please save this number so you're not startled when the miraculous visits you."
+    number = '+1' + phone
+    message = client.messages \
+        .create(
+        messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+        body=body,
+        to=('+1' + phone)
+    )
+    print(message.sid)
+
+def schedule_show_texts(user_number, show):
     account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
     auth_token  = "cfbab195621b28a0753619e06ce95fe4"
     client = Client(account_sid, auth_token)
@@ -26,10 +41,7 @@ def schedule(user_number, show):
     # send now
     if(now):
         body = f"Hi from ephem.fm!  One of the shows you'll receive is scheduled to happen soon! It's called {show_name} on the station {show_station} out of {show_location}. Please go to {show_station_url} and tune in at the next hour mark."
-        print(body)
         number = '+1' + user_number
-        print(number)
-
         message = client.messages \
             .create(
             messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',

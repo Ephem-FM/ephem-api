@@ -11,22 +11,22 @@ def main(phone, show):
     schedule_show_texts(phone, show)
 
 def send_introductory_text(phone):
-    account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
-    auth_token  = "cfbab195621b28a0753619e06ce95fe4"
+    account_sid = ACCOUNT_SID
+    auth_token  = AUTH_TOKEN
     client = Client(account_sid, auth_token)
     body = f"Hi friend :)  Welcome to ephem.  Your three shows have been scheduled and when the vibe's right, you'll know.  Please save this number so you're not startled when the miraculous visits you."
     number = '+1' + phone
     message = client.messages \
         .create(
-        messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+        messaging_service_sid=MSS,
         body=body,
         to=('+1' + phone)
     )
     print(message.sid)
 
 def schedule_show_texts(user_number, show):
-    account_sid = "ACfe19105a3aa7d11c16d6272a0d3eccda"
-    auth_token  = "cfbab195621b28a0753619e06ce95fe4"
+    account_sid = ACCOUNT_SID
+    auth_token  = AUTH_TOKEN
     client = Client(account_sid, auth_token)
 
     show_day, start_time, timezone = show[3], show[4], show[14]
@@ -43,7 +43,7 @@ def schedule_show_texts(user_number, show):
         number = '+1' + user_number
         message = client.messages \
             .create(
-            messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+            messaging_service_sid=MSS,
             body=body,
             to=('+1' + user_number)
         )
@@ -55,7 +55,7 @@ def schedule_show_texts(user_number, show):
         number = '+1' + user_number
         message = client.messages \
             .create(
-                messaging_service_sid='MG73e4d89da9b2863a263e62abccc879a1',
+                messaging_service_sid=MSS,
                 body=body,
                 send_at=when,
                 schedule_type='fixed',

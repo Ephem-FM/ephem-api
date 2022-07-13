@@ -12,10 +12,10 @@ def retrieve_df(table_name):
     # enter in characteristics of different databases
     DATABASES = {
         'production':{
-            'NAME': 'dc3j53nnljkf17',
-            'USER': 'qckrwbcldmcbua',
-            'PASSWORD': 'd843c6fcbe8d0411c1f113f00fdc458459f530b6bbf629a7c15e25ad09bf23e7',
-            'HOST': 'ec2-3-226-163-72.compute-1.amazonaws.com',
+            'NAME': NAME,
+            'USER': USER,
+            'PASSWORD': PW,
+            'HOST': HOST,
             'PORT': 5432,
         },
     }
@@ -57,7 +57,7 @@ def top_three_shows(df, preferences):
     return top_3
 
 def retrieve_show_info(show_ids):
-    conn = psycopg2.connect('postgres://qckrwbcldmcbua:d843c6fcbe8d0411c1f113f00fdc458459f530b6bbf629a7c15e25ad09bf23e7@ec2-3-226-163-72.compute-1.amazonaws.com:5432/dc3j53nnljkf17')
+    conn = psycopg2.connect(CONNECTION_STRING)
     conn.autocommit = True
     cur = conn.cursor()
     shows = []
